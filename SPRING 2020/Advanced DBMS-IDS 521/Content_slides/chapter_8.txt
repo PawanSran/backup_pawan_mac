@@ -1,0 +1,33 @@
+In Chapter 8, we discussed exactly two types of Indexes: B+ Tree and Hash indexes.
+These two indexes use data entries (see the figures on slide #9 for B+ Tree index).
+Each data entry has three possible alternatives: 
+(1) data record with key value k,
+(2) <k, rid of data record with search key value k>,
+(3) <k, list of rids of data records with search key k>.
+
+Let us denote each data entry as k*. Let us assume that we have four employee data records as follows:
+Emp_id	Name	Salary	Age	DeptNo
+ 1034	A	4000	30	2        ====> assume record id is rid_1
+ 1405	C	3500	26	1        ====> assume record id is rid_2
+ 1652	B	3700	28	4        ====> assume record id is rid_3
+ 1924	A	4200	36	1        ====> assume record id is rid_4
+
+Suppose that we have a B+ Tree index with search key Name (i.e., k is Name) using alternative 1.
+Then, the four data entries would look like the following:
+first k*  ===>   <1034, A, 4000, 30, 2>
+second k* ===>   <1924, A, 4200, 36, 1>
+third k*  ===>   <1652, B, 3700, 28, 4>
+fourth k* ===>   <1405, C, 3500, 26, 1>
+
+Suppose that we have a B+ Tree index with search key Name (i.e., k is Name) using alternative 2.
+Then, the four data entries would look like the following:
+first k*  ===>   <A, rid_1>
+second k* ===>   <A, rid_4>
+third k*  ===>   <B, rid_3>
+fourth k* ===>   <C, rid_2>
+
+Suppose that we have a B+ Tree index with search key Name (i.e., k is Name) using alternative 3.
+Then, the four data entries would look like the following:
+first k*  ===>   <A, rid_1, rid_4>
+second k* ===>   <B, rid_3>
+third k*  ===>   <C, rid_2>
